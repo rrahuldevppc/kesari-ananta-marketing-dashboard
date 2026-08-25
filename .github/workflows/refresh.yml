@@ -1,0 +1,39 @@
+name: Refresh Meta Ads data
+
+on:
+  schedule:
+    - cron: "15 */4 * * *"   # every 4 hours
+  workflow_dispatch: {}       # allows manual "Run workflow" trigger too
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pull fresh Meta data and update index.html
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_AD_ACCOUNT_ID: ${{ secrets.META_AD_ACCOUNT_ID }}
+        run: python scripts/refresh_data.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config user.name "meta-ads-refresh-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- index.html; then
+            echo "No data changes, nothing to commit."
+          else
+            git add index.html
+            git commit -m "Auto-refresh Meta Ads data ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git push
+          fi
