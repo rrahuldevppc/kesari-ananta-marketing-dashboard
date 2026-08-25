@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, timedelta
@@ -36,8 +37,12 @@ def _get(url, params):
     qs = urllib.parse.urlencode(params)
     full = f"{url}?{qs}"
     req = urllib.request.Request(full, headers={"User-Agent": "kesari-ananta-dashboard/1.0"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {e.code} on {url}: {body}") from None
 
 
 def graph_get(path, **params):
@@ -55,9 +60,13 @@ def paginate(path, **params):
     paging = data.get("paging", {})
     next_url = paging.get("next")
     while next_url:
-        req = urllib.request.Request(next_url, headers={"User-Agent": "kesari-ananta-dashboard/1.0"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        try:
+            req = urllib.request.Request(next_url, headers={"User-Agent": "kesari-ananta-dashboard/1.0"})
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"HTTP {e.code} on {next_url}: {body}") from None
         if "error" in data:
             raise RuntimeError(f"Meta API error paginating {path}: {data['error']}")
         out.extend(data.get("data", []))
