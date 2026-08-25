@@ -166,7 +166,7 @@ def fetch_daily(level, object_ids, days=10):
         level=level,
         time_range=json.dumps({"since": since.isoformat(), "until": until.isoformat()}),
         time_increment=1,
-        fields=f"{id_field},{name_field},campaign_id,campaign_name,adset_id,adset_name,spend,impressions,clicks,actions,action_values,date_start",
+        fields=",".join(dict.fromkeys([id_field, name_field, "campaign_id", "campaign_name", "adset_id", "adset_name", "spend", "impressions", "clicks", "actions", "action_values", "date_start"])),
         filtering=json.dumps([{"field": f"{level}.id", "operator": "IN", "value": object_ids}]),
         limit=500,
     )
