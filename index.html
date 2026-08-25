@@ -280,6 +280,29 @@ footer b{color:var(--text-muted);}
   </header>
 
   <section class="sect">
+    <div class="sect-head"><h2 class="sect-title">Active Campaigns — Today</h2><span class="sect-count" id="cnt1">0</span></div>
+    <div class="sect-desc">Only campaigns currently active in Meta. Figures are for today only — click a campaign for its ad sets, click an ad set for its ads.</div>
+    <div class="filter-bar">
+      <div class="fgrp"><span class="flabel">Search</span><input class="search-input" id="search1" placeholder="Campaign name…"></div>
+      <div class="fgrp"><span class="flabel">Sort</span>
+        <select class="sort-select" id="sort1">
+          <option value="spend">Today's spend</option>
+          <option value="roas">Today's ROAS</option>
+          <option value="age">Age</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-wrap"><table id="active1Table">
+      <thead><tr>
+        <th>Campaign</th><th>Status</th><th>Launched</th><th>Age</th>
+        <th>Today's Spend</th><th>Conversions</th><th>Today's ROAS</th>
+      </tr></thead>
+      <tbody id="active1Body"></tbody>
+    </table></div>
+  </section>
+
+  <section class="sect">
     <div class="sect-head"><h2 class="sect-title">Active Campaigns — Last 5 Days</h2><span class="sect-count" id="cnt5">0</span></div>
     <div class="sect-desc">Only campaigns currently active in Meta. Figures default to the last 5 days — click a campaign for its ad sets, click an ad set for its ads.</div>
     <div class="filter-bar">
@@ -388,6 +411,116 @@ const ADSETS_BY_CAMPAIGN = {};
 (MODEL.adsets||[]).forEach(a => { (ADSETS_BY_CAMPAIGN[a.campaign] ||= []).push(a); });
 const ADS_BY_ADSET = {};
 (MODEL.ads||[]).forEach(a => { (ADS_BY_ADSET[a.campaign+'||'+a.adset] ||= []).push(a); });
+
+// ---------- Active — Today ----------
+const ACTIVE1 = MODEL.active1 || {campaigns:[],adsets:[],ads:[]};
+const ADSETS1_BY_CAMPAIGN = {};
+(ACTIVE1.adsets||[]).forEach(a => { (ADSETS1_BY_CAMPAIGN[a.campaign] ||= []).push(a); });
+const ADS1_BY_ADSET = {};
+(ACTIVE1.ads||[]).forEach(a => { (ADS1_BY_ADSET[a.campaign+'||'+a.adset] ||= []).push(a); });
+
+let open1Campaigns = new Set(), open1Adsets = new Set();
+let search1Val = '', sort1Val = 'spend';
+
+function metricRow1(m){
+  if(!m || m.spend === 0) return `<span style="color:var(--text-faint);font-size:11.5px;">no spend recorded</span>`;
+  return `<span class="tabular" style="display:inline-flex;gap:14px;flex-wrap:wrap;">
+    <span>Spend <b>${money(m.spend)}</b></span>
+    <span>CTR <b>${pct(m.ctr)}</b></span>
+    <span>CPC <b>${moneyD(m.cpc)}</b></span>
+    <span>Conv <b>${num(m.conv)}</b></span>
+    <span>ROAS <b>${roasFmt(m.roas)}</b></span>
+    <span style="color:var(--text-faint);">${m.days} day${m.days===1?'':'s'} of data</span>
+  </span>`;
+}
+
+function render1AdRow(ad){
+  return `<tr class="nested-row ad-nested">
+    <td class="name-cell" style="padding-left:64px;">${esc(ad.name)}
+      <span class="pill ${statusPillClass(ad.status)}" style="margin-left:8px;padding:1px 6px;">${statusLabel(ad.status)}</span>
+    </td>
+    <td colspan="6">${metricRow1(ad.agg1)}</td>
+  </tr>`;
+}
+
+function render1AdsetRow(campName, adset){
+  const key = campName + '||' + adset.name;
+  const isOpen = open1Adsets.has(key);
+  const ads = ADS1_BY_ADSET[key] || [];
+  let rows = `<tr class="nested-row adset-nested" data-toggle1-adset="${esc(key)}">
+    <td class="name-cell" style="padding-left:40px;cursor:pointer;">
+      <span class="drill-caret ${isOpen?'open':''}">▸</span>
+      ${esc(adset.name)}
+      <span class="pill ${statusPillClass(adset.status)}" style="margin-left:8px;padding:1px 6px;">${statusLabel(adset.status)}</span>
+      <span style="color:var(--text-faint);font-size:11px;margin-left:6px;">${ads.length} ad${ads.length===1?'':'s'}</span>
+    </td>
+    <td colspan="6">${metricRow1(adset.agg1)}</td>
+  </tr>`;
+  if(isOpen){
+    rows += ads.length
+      ? ads.map(render1AdRow).join('')
+      : `<tr class="nested-row"><td colspan="7" style="padding-left:64px;color:var(--text-faint);font-size:11.5px;">No ad-level data pulled for this ad set.</td></tr>`;
+  }
+  return rows;
+}
+
+function render1CampaignDetail(camp){
+  const adsets = ADSETS1_BY_CAMPAIGN[camp.name] || [];
+  if(!adsets.length){
+    return `<tr class="nested-row"><td colspan="7" style="padding-left:40px;color:var(--text-faint);font-size:11.5px;">No ad set breakdown was pulled for this campaign in the current data refresh.</td></tr>`;
+  }
+  return adsets.map(a => render1AdsetRow(camp.name, a)).join('');
+}
+
+function build1Table(){
+  let list = [...ACTIVE1.campaigns];
+  document.getElementById('cnt1').textContent = list.length;
+  if(search1Val) list = list.filter(c => c.name.toLowerCase().includes(search1Val.toLowerCase()));
+  if(sort1Val==='spend') list.sort((a,b)=>(b.agg1.spend||0)-(a.agg1.spend||0));
+  else if(sort1Val==='roas') list.sort((a,b)=>(b.agg1.roas||0)-(a.agg1.roas||0));
+  else if(sort1Val==='age') list.sort((a,b)=>(b.age||0)-(a.age||0));
+  else if(sort1Val==='name') list.sort((a,b)=>a.name.localeCompare(b.name));
+
+  const body = document.getElementById('active1Body');
+  if(!list.length){ body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-faint);padding:20px;">No active campaigns right now.</td></tr>`; return; }
+
+  body.innerHTML = list.map(c => {
+    const isOpen = open1Campaigns.has(c.id);
+    let html = `<tr data-toggle1-campaign="${esc(c.id)}">
+      <td class="name-cell" style="cursor:pointer;">
+        <span class="drill-caret ${isOpen?'open':''}">▸</span>
+        ${esc(c.name)}
+      </td>
+      <td style="text-align:left;"><span class="pill ${statusPillClass(c.status)}">${statusLabel(c.status)}</span></td>
+      <td>${c.launch||'—'}</td>
+      <td>${c.age!==null?'Day '+c.age:'—'}</td>
+      <td>${money(c.agg1.spend)}</td>
+      <td>${num(c.agg1.conv)}</td>
+      <td>${c.agg1.spend>0?roasFmt(c.agg1.roas):'—'}</td>
+    </tr>`;
+    if(isOpen) html += render1CampaignDetail(c);
+    return html;
+  }).join('');
+}
+
+document.getElementById('active1Body').addEventListener('click', (e) => {
+  const adsetRow = e.target.closest('[data-toggle1-adset]');
+  const campRow = e.target.closest('[data-toggle1-campaign]');
+  if(adsetRow){
+    const key = adsetRow.dataset.toggle1Adset;
+    if(open1Adsets.has(key)) open1Adsets.delete(key); else open1Adsets.add(key);
+    build1Table();
+    return;
+  }
+  if(campRow){
+    const id = campRow.dataset.toggle1Campaign;
+    if(open1Campaigns.has(id)) open1Campaigns.delete(id); else open1Campaigns.add(id);
+    build1Table();
+  }
+});
+document.getElementById('search1').addEventListener('input', e => { search1Val = e.target.value; build1Table(); });
+document.getElementById('sort1').addEventListener('change', e => { sort1Val = e.target.value; build1Table(); });
+build1Table();
 
 // ---------- Active — Last 10 Days ----------
 const ACTIVE5 = MODEL.active5 || {campaigns:[],adsets:[],ads:[]};
