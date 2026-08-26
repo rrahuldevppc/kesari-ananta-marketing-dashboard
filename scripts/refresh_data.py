@@ -22,7 +22,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 API_VERSION = os.environ.get("META_API_VERSION", "v21.0")
 ACCESS_TOKEN = os.environ["META_ACCESS_TOKEN"]
@@ -302,7 +302,8 @@ def main():
 
     payload = json.loads(m.group(2))
     payload["account"] = {"name": "Kesari Ananta Ads", "account_id": AD_ACCOUNT_ID, "currency": "INR"}
-    payload["refreshed"] = f"{date.today().isoformat()}T00:00:00+05:30"
+    ist = timezone(timedelta(hours=5, minutes=30))
+    payload["refreshed"] = datetime.now(ist).strftime("%Y-%m-%dT%H:%M:%S+05:30")
     payload["library"] = library
     payload["active10"] = active10
     payload["active5"] = active5
