@@ -376,6 +376,24 @@ footer b{color:var(--text-muted);}
 .cmp-bar-fill.aug{background:var(--text-faint);}
 .cmp-bar-fill.sep{background:var(--accent);}
 
+/* ---------- placeholder / draft data marker ---------- */
+.ph-pill{display:inline-block; background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn-line); border-radius:20px; padding:1px 9px; font:700 9.5px var(--body); text-transform:uppercase; letter-spacing:.04em; margin-left:6px; vertical-align:middle;}
+.real-pill{display:inline-block; background:var(--good-bg); color:var(--good); border:1px solid var(--good-line); border-radius:20px; padding:1px 9px; font:700 9.5px var(--body); text-transform:uppercase; letter-spacing:.04em; margin-left:6px; vertical-align:middle;}
+.ph-row td{color:var(--text-faint); font-style:italic;}
+.draft-banner{background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn); border-radius:var(--radius-sm); padding:10px 14px; font-size:12px; font-weight:600; margin-bottom:16px;}
+
+/* ---------- P&L / LTV / fund allocation tabs ---------- */
+.pnl-table td.pnl-num{text-align:right; font:700 13px var(--mono); font-variant-numeric:tabular-nums;}
+.pnl-table tr.pnl-sub td{color:var(--text-muted); font-size:12px;}
+.pnl-table tr.pnl-neg td.pnl-num{color:var(--bad);}
+.pnl-table tr.pnl-pos td.pnl-num{color:var(--good);}
+
+.formula-box{background:var(--surface-2); border:1px dashed var(--border); border-radius:var(--radius); padding:14px 16px; margin:12px 0; font:700 14px var(--mono); color:var(--text); text-align:center;}
+.formula-box .fb-note{display:block; font:600 11px var(--body); color:var(--text-muted); margin-top:8px; text-transform:none; letter-spacing:0;}
+
+.alloc-bar{display:flex; height:32px; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:10px;}
+.alloc-seg{display:flex; align-items:center; justify-content:center; font:700 11px var(--mono); color:#fff; white-space:nowrap; overflow:hidden;}
+
 </style>
 
 <div class="wrap">
@@ -384,6 +402,9 @@ footer b{color:var(--text-muted);}
     <button class="tab-btn active" data-tab="metaads" type="button">Meta Ads</button>
     <button class="tab-btn" data-tab="upits" type="button">UPITS Event</button>
     <button class="tab-btn" data-tab="plan" type="button">Marketing Plan</button>
+    <button class="tab-btn" data-tab="pnl" type="button">Real Calculation</button>
+    <button class="tab-btn" data-tab="ltv" type="button">LTV Flow</button>
+    <button class="tab-btn" data-tab="funds" type="button">Fund Allocation</button>
   </div>
 
   <div id="panel-metaads" class="tab-panel">
@@ -862,6 +883,166 @@ footer b{color:var(--text-muted);}
 
   </div>
   <!-- /panel-plan -->
+
+  <div id="panel-pnl" class="tab-panel" style="display:none">
+
+    <header class="top">
+      <div>
+        <div class="eyebrow">Finance</div>
+        <h1 class="title">Real Calculation — P&amp;L</h1>
+        <div class="acct-line">
+          <span>Every rupee spent, every rupee made — real profitability, not just ROAS</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="draft-banner">🚧 Early draft. Ad spend and ad-attributed revenue below are real, live numbers. COGS and other operating costs are placeholders — tell me the real figures and this becomes a true P&amp;L.</div>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">August 2026, Month-to-Date</div><div class="sect-count" id="pnlAsOf">—</div></div>
+      <div class="table-wrap"><table class="pnl-table">
+        <tbody>
+          <tr><td>Ad-attributed revenue (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">—</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta revenue (live)</td><td class="pnl-num" id="pnlRevMeta">—</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google revenue (entered)</td><td class="pnl-num">₹2,500</td></tr>
+          <tr class="ph-row"><td>Cost of goods sold (COGS) <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
+          <tr class="budget-total-row"><td>Gross profit</td><td class="pnl-num">—</td></tr>
+          <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend">—</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta spend (live)</td><td class="pnl-num" id="pnlSpendMeta">—</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google spend (entered)</td><td class="pnl-num">₹11,000</td></tr>
+          <tr class="ph-row"><td>Other operating costs — shipping, packaging, payment gateway fees, salaries, event costs <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
+          <tr class="budget-total-row"><td>Net profit</td><td class="pnl-num">—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sect-desc" style="margin-top:12px;">"Ad-attributed revenue" is what Meta/Google report as sales from ads — it isn't necessarily your total Shopify revenue (organic/direct traffic isn't counted here). Once COGS and other costs are known, gross profit and net profit will calculate automatically.</div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">What's Needed to Complete This</div></div>
+      <div class="plan-summary">
+        <ul>
+          <li><b>COGS</b> — your per-order or blended cost of goods (dry fruits, ghee, laddu, packaging) as a % of revenue or a fixed ₹ per order.</li>
+          <li><b>Shipping &amp; fulfillment cost</b> — average cost per order shipped.</li>
+          <li><b>Payment gateway fees</b> — % charged by your payment processor (Razorpay/etc.).</li>
+          <li><b>Salaries / contractor costs</b> — monthly team cost, if you want it folded into this P&amp;L.</li>
+          <li><b>Event &amp; one-off costs</b> — e.g. the UPITS booth budget, when it should count against a given month.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+  <!-- /panel-pnl -->
+
+
+  <div id="panel-ltv" class="tab-panel" style="display:none">
+
+    <header class="top">
+      <div>
+        <div class="eyebrow">Retention</div>
+        <h1 class="title">LTV Flow</h1>
+        <div class="acct-line">
+          <span>Retention plan and results for existing customers</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="draft-banner">🚧 Early draft. No Shopify order-history connector yet, so repeat-purchase numbers below are placeholders — the retention plan is a first-pass suggestion, not confirmed.</div>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">Customer Mix</div></div>
+      <div class="stat-chip-row">
+        <div class="stat-chip">New customers, Aug (live from Meta) <b id="ltvNewCust">—</b></div>
+        <div class="stat-chip">Repeat purchase rate <b>— <span class="ph-pill">Placeholder</span></b></div>
+        <div class="stat-chip">Avg. orders / customer / year <b>— <span class="ph-pill">Placeholder</span></b></div>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">LTV Formula</div></div>
+      <div class="formula-box">
+        LTV = Avg. Order Value  ×  Purchase Frequency  ×  Avg. Customer Lifespan
+        <span class="fb-note">Plug in real AOV, repeat-order frequency and average months-active-as-customer once known — this tile will calculate a real LTV number.</span>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metric</th><th>Value</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Average order value</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr><td>Purchase frequency (orders/year)</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr><td>Average customer lifespan</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr class="budget-total-row"><td>Estimated LTV</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">Retention Plan — First Draft</div></div>
+      <div class="plan-summary">
+        <ul>
+          <li><b>Reorder reminders</b> — ghee and laddu are consumables with a natural repurchase cycle (roughly 30-45 days for a household); a timed WhatsApp nudge around that window is the single highest-leverage retention lever available right now.</li>
+          <li><b>Referral loop</b> — feed CardPing leads captured at the UPITS booth into a referral program: existing buyers get a code, new customers get a discount, referrer gets a reward.</li>
+          <li><b>Festive gifting reminders</b> — Diwali (~8 Nov 2026) and other festivals are natural repeat-purchase triggers for gifting-sized orders; reminder + gifting-offer combo timed 3-4 weeks ahead.</li>
+          <li><b>Post-purchase cross-sell</b> — a ghee buyer gets a laddu/dry-fruit cross-sell message after their expected consumption midpoint, and vice versa.</li>
+          <li><b>Subscription option</b> — a simple "auto-reorder every N days" option for ghee/laddu would convert one-time buyers into recurring revenue without needing new ad spend.</li>
+        </ul>
+      </div>
+      <div class="sect-desc" style="margin-top:10px;">These are starting suggestions based on the product category — confirm or adjust based on what you're actually planning, and this section will track real results against it.</div>
+    </section>
+
+  </div>
+  <!-- /panel-ltv -->
+
+
+  <div id="panel-funds" class="tab-panel" style="display:none">
+
+    <header class="top">
+      <div>
+        <div class="eyebrow">Finance</div>
+        <h1 class="title">Fund Allocation</h1>
+        <div class="acct-line">
+          <span>Where the money is actually going, across the whole business</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="draft-banner">🚧 Early draft. The four categories below are amounts you've already confirmed (ad budgets + UPITS event budget). Regular product COGS, salaries and other overhead aren't captured yet — add them and this becomes the full picture.</div>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">Known Allocations</div><div class="sect-count">₹4,45,000</div></div>
+      <div class="alloc-bar">
+        <div class="alloc-seg" style="width:56.2%; background:var(--accent);">Meta Ads 56%</div>
+        <div class="alloc-seg" style="width:11.2%; background:var(--google-color); color:#0A2530;">Google 11%</div>
+        <div class="alloc-seg" style="width:22.5%; background:var(--good);">UPITS OPEX 22%</div>
+        <div class="alloc-seg" style="width:10.1%; background:var(--warn);">UPITS Stock 10%</div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Category</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Meta Ads (September plan)</td><td class="pnl-num">₹2,50,000</td><td><span class="real-pill">Confirmed</span></td></tr>
+          <tr><td>Google Ads (September plan)</td><td class="pnl-num">₹50,000</td><td><span class="real-pill">Confirmed</span></td></tr>
+          <tr><td>UPITS Event — operating budget (booth, dressing, TV, staff, travel, etc.)</td><td class="pnl-num">₹1,00,000</td><td><span class="real-pill">Confirmed</span></td></tr>
+          <tr><td>UPITS Event — retail sellable inventory (working capital, separate from OPEX)</td><td class="pnl-num">₹40,000–50,000</td><td><span class="real-pill">Confirmed</span></td></tr>
+          <tr class="budget-total-row"><td>Known total</td><td class="pnl-num">~₹4,45,000</td><td></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">Not Yet Captured</div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Category</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="ph-row"><td>Regular D2C product COGS (outside UPITS stock)</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr class="ph-row"><td>Salaries / contractor costs</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr class="ph-row"><td>Shipping &amp; fulfillment</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+          <tr class="ph-row"><td>Other overhead (tools, subscriptions, misc.)</td><td>—</td><td><span class="ph-pill">Placeholder</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="sect-desc" style="margin-top:10px;">Give me these numbers whenever you have them and this section — plus the Real Calculation P&amp;L tab — will fill in automatically.</div>
+    </section>
+
+  </div>
+  <!-- /panel-funds -->
+
 
 </div>
 
@@ -1454,6 +1635,42 @@ buildLibrary();
   } else {
     if (subEl) subEl.textContent = 'Syncing from Meta — refreshes automatically within 15 min';
     if (lblEl) lblEl.textContent = '— / ' + target.customers + ' customer target';
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var MODEL3;
+  try { MODEL3 = JSON.parse(document.getElementById('data-payload').textContent); } catch(e){ MODEL3 = {}; }
+  var mtd = MODEL3.mtd || null;
+
+  // Fixed Google Ads August entries (no live connector yet)
+  var GOOGLE_AUG_SPEND = 11000;
+  var GOOGLE_AUG_REV = 2500;
+
+  function money(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+
+  if (mtd) {
+    var metaSpend = mtd.spend || 0;
+    var metaRev = mtd.rev || 0;
+    var totalRevenue = metaRev + GOOGLE_AUG_REV;
+    var totalAdSpend = metaSpend + GOOGLE_AUG_SPEND;
+
+    var asOf = document.getElementById('pnlAsOf');
+    if (asOf) asOf.textContent = mtd.since + ' → ' + mtd.until;
+
+    var revEl = document.getElementById('pnlRevenue');
+    if (revEl) revEl.textContent = money(totalRevenue);
+    var revMetaEl = document.getElementById('pnlRevMeta');
+    if (revMetaEl) revMetaEl.textContent = money(metaRev);
+    var spendEl = document.getElementById('pnlAdSpend');
+    if (spendEl) spendEl.textContent = money(totalAdSpend);
+    var spendMetaEl = document.getElementById('pnlSpendMeta');
+    if (spendMetaEl) spendMetaEl.textContent = money(metaSpend);
+
+    var newCustEl = document.getElementById('ltvNewCust');
+    if (newCustEl) newCustEl.textContent = Math.round((mtd.conv || 0) + 4); // + 4 Google customers (entered)
   }
 })();
 </script>
