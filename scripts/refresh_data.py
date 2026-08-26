@@ -130,6 +130,28 @@ def fetch_lifetime_library():
     return library, campaigns
 
 
+def fetch_month_to_date():
+    """Account-level spend/conversions from the 1st of the current month through today."""
+    today = date.today()
+    since = today.replace(day=1)
+    rows = paginate(
+        f"{AD_ACCOUNT_ID}/insights",
+        level="account",
+        time_range=json.dumps({"since": since.isoformat(), "until": today.isoformat()}),
+        fields="spend,impressions,clicks,actions,action_values",
+        limit=10,
+    )
+    row = rows[0] if rows else {}
+    m = insight_row_to_metrics(row)
+    return {
+        "month": since.strftime("%Y-%m"),
+        "since": since.isoformat(),
+        "until": today.isoformat(),
+        "spend": m["spend"], "conv": m["conv"], "roas": m["roas"],
+        "impr": m["impr"], "clicks": m["clicks"],
+    }
+
+
 def fetch_active_family(campaigns):
     active_campaigns = [c for c in campaigns if c.get("status") == "ACTIVE"]
     active_ids = [c["id"] for c in active_campaigns]
@@ -242,6 +264,7 @@ def build_active_block(active_campaigns, adsets, ads, camp_daily, adset_daily, a
 
 
 def main():
+    mtd = fetch_month_to_date()
     library, all_campaigns = fetch_lifetime_library()
     active_campaigns, adsets, ads = fetch_active_family(all_campaigns)
 
@@ -284,6 +307,7 @@ def main():
     payload["active10"] = active10
     payload["active5"] = active5
     payload["active1"] = active1
+    payload["mtd"] = mtd
 
     new_json = json.dumps(payload)
     new_html = html[: m.start(2)] + new_json + html[m.end(2):]
@@ -292,7 +316,8 @@ def main():
         f.write(new_html)
 
     print(f"Refreshed: {len(library)} lifetime campaigns, {len(active_campaigns)} active, "
-          f"{len(adsets)} adsets, {len(ads)} ads.")
+          f"{len(adsets)} adsets, {len(ads)} ads. MTD ({mtd['month']}): "
+          f"spend {mtd['spend']}, conv {mtd['conv']}, roas {mtd['roas']}.")
 
 
 if __name__ == "__main__":
