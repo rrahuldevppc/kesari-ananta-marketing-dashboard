@@ -147,8 +147,8 @@ def fetch_month_to_date():
         "month": since.strftime("%Y-%m"),
         "since": since.isoformat(),
         "until": today.isoformat(),
-        "spend": m["spend"], "conv": m["conv"], "roas": m["roas"],
-        "impr": m["impr"], "clicks": m["clicks"],
+        "spend": m["spend"], "conv": m["conv"], "roas": m["roas"], "rev": m["rev"],
+        "impr": m["impr"], "clicks": m["clicks"], "ctr": m["ctr"], "cpc": m["cpc"],
     }
 
 
@@ -317,7 +317,7 @@ def main():
 
     print(f"Refreshed: {len(library)} lifetime campaigns, {len(active_campaigns)} active, "
           f"{len(adsets)} adsets, {len(ads)} ads. MTD ({mtd['month']}): "
-          f"spend {mtd['spend']}, conv {mtd['conv']}, roas {mtd['roas']}.")
+          f"spend {mtd['spend']}, rev {mtd['rev']}, conv {mtd['conv']}, roas {mtd['roas']}.")
 
 
 if __name__ == "__main__":

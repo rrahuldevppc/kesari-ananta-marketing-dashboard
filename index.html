@@ -335,8 +335,7 @@ footer b{color:var(--text-muted);}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --google-color:#3CC4E0; --google-soft:#173540; } }
 :root[data-theme="dark"]{ --google-color:#3CC4E0; --google-soft:#173540; }
 
-.plan-stat-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px;}
-@media (max-width:820px){.plan-stat-row{grid-template-columns:1fr;}}
+.plan-stat-row{display:flex; flex-direction:column; gap:14px; margin-bottom:22px;}
 .stat-tile{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow);}
 .stat-tile .st-label{font:700 11px var(--body); text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); display:flex; align-items:center; justify-content:space-between;}
 .stat-tile .st-num{font:800 34px var(--mono); color:var(--text); margin:8px 0 2px; font-variant-numeric:tabular-nums;}
@@ -348,6 +347,12 @@ footer b{color:var(--text-muted);}
 .stat-chip-row{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
 .stat-chip{background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:6px 10px; font-size:11px; color:var(--text-muted);}
 .stat-chip b{color:var(--text); font:700 12.5px var(--mono);}
+.mm-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:12px 0 14px;}
+@media (max-width:700px){.mm-grid{grid-template-columns:repeat(2,1fr);}}
+.mm-cell{background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-sm); padding:9px 11px;}
+.mm-cell .mm-label{font:700 10px var(--body); text-transform:uppercase; letter-spacing:.04em; color:var(--text-faint);}
+.mm-cell .mm-val{font:800 19px var(--mono); color:var(--text); margin-top:3px; font-variant-numeric:tabular-nums;}
+.mm-cell.mm-roas .mm-val{color:var(--good);}
 
 .budget-bar{display:flex; height:34px; border-radius:8px; overflow:hidden; border:1px solid var(--border);}
 .budget-seg{display:flex; align-items:center; justify-content:center; font:700 12px var(--mono); color:#fff; white-space:nowrap; overflow:hidden;}
@@ -698,12 +703,17 @@ footer b{color:var(--text-muted);}
 
     <section class="sect">
       <div class="plan-stat-row">
-        <div class="stat-tile">
-          <div class="st-label">This month <span id="planMonthLabel">—</span></div>
-          <div class="st-num" id="planMtdNum">—<small>customers</small></div>
-          <div class="st-sub" id="planMtdSub">Live from Meta · updates every 15 min</div>
+        <div class="stat-tile wide">
+          <div class="st-label">This month <span id="planMonthLabel">—</span> — live from Meta</div>
+          <div class="mm-grid">
+            <div class="mm-cell"><div class="mm-label">Spent</div><div class="mm-val" id="mmSpend">—</div></div>
+            <div class="mm-cell"><div class="mm-label">Revenue made</div><div class="mm-val" id="mmRev">—</div></div>
+            <div class="mm-cell"><div class="mm-label">Customers</div><div class="mm-val" id="mmConv">—</div></div>
+            <div class="mm-cell mm-roas"><div class="mm-label">ROAS</div><div class="mm-val" id="mmRoas">—</div></div>
+          </div>
+          <div class="st-sub" id="planMtdSub">Syncing from Meta — updates every 15 min</div>
           <div class="stat-progress-track"><div class="stat-progress-fill" id="planMtdFill" style="width:0%"></div></div>
-          <div class="stat-progress-label" id="planMtdLabel">— / 100 target</div>
+          <div class="stat-progress-label" id="planMtdLabel">— / 100 customer target</div>
         </div>
         <div class="stat-tile">
           <div class="st-label">September target</div>
@@ -1346,24 +1356,31 @@ buildLibrary();
   var target = (monthKey && TARGETS[monthKey]) || TARGETS['2026-08'];
 
   var labelEl = document.getElementById('planMonthLabel');
-  var numEl = document.getElementById('planMtdNum');
   var subEl = document.getElementById('planMtdSub');
   var fillEl = document.getElementById('planMtdFill');
   var lblEl = document.getElementById('planMtdLabel');
+  var spendEl = document.getElementById('mmSpend');
+  var revEl = document.getElementById('mmRev');
+  var convEl = document.getElementById('mmConv');
+  var roasEl = document.getElementById('mmRoas');
+
+  function money(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
 
   if (labelEl) labelEl.textContent = target.label;
 
   if (mtd && typeof mtd.conv === 'number') {
     var conv = Math.round(mtd.conv);
-    if (numEl) numEl.innerHTML = conv + '<small>customers</small>';
-    if (subEl) subEl.textContent = 'Live from Meta (' + mtd.since + ' → ' + mtd.until + ') · updates every 15 min';
+    if (spendEl) spendEl.textContent = money(mtd.spend || 0);
+    if (revEl) revEl.textContent = money(mtd.rev || 0);
+    if (convEl) convEl.textContent = conv;
+    if (roasEl) roasEl.textContent = (mtd.roas || 0).toFixed(2) + 'x';
+    if (subEl) subEl.textContent = 'Meta, ' + mtd.since + ' → ' + mtd.until + ' · updates every 15 min';
     var pct = target.customers ? Math.min(100, Math.round(conv / target.customers * 100)) : 0;
     if (fillEl) fillEl.style.width = pct + '%';
-    if (lblEl) lblEl.textContent = conv + ' / ' + target.customers + ' target (' + pct + '%)';
+    if (lblEl) lblEl.textContent = conv + ' / ' + target.customers + ' customer target (' + pct + '%)';
   } else {
-    if (numEl) numEl.innerHTML = '—<small>customers</small>';
     if (subEl) subEl.textContent = 'Syncing from Meta — refreshes automatically within 15 min';
-    if (lblEl) lblEl.textContent = '— / ' + target.customers + ' target';
+    if (lblEl) lblEl.textContent = '— / ' + target.customers + ' customer target';
   }
 })();
 </script>
