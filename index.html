@@ -353,6 +353,7 @@ footer b{color:var(--text-muted);}
 .mm-cell .mm-label{font:700 10px var(--body); text-transform:uppercase; letter-spacing:.04em; color:var(--text-faint);}
 .mm-cell .mm-val{font:800 19px var(--mono); color:var(--text); margin-top:3px; font-variant-numeric:tabular-nums;}
 .mm-cell.mm-roas .mm-val{color:var(--good);}
+.mm-cell .mm-hint{font-size:10px; color:var(--text-faint); margin-top:3px; line-height:1.3;}
 
 .budget-bar{display:flex; height:34px; border-radius:8px; overflow:hidden; border:1px solid var(--border);}
 .budget-seg{display:flex; align-items:center; justify-content:center; font:700 12px var(--mono); color:#fff; white-space:nowrap; overflow:hidden;}
@@ -696,27 +697,40 @@ footer b{color:var(--text-muted);}
         <div class="eyebrow">Growth</div>
         <h1 class="title">Marketing Plan — Aug → Sep 2026</h1>
         <div class="acct-line">
-          <span>Customer-acquisition target &amp; ad spend plan</span>
+          <span>What's happening now vs. what September is planned to be</span>
         </div>
       </div>
     </header>
 
     <section class="sect">
+      <div class="sect-desc" style="margin-bottom:14px;">The card below is <b>live</b> — pulled straight from your Meta ad account and refreshed every 15 minutes. The card beside it is your <b>stated plan</b> for September and won't move until September's real numbers come in.</div>
       <div class="plan-stat-row">
         <div class="stat-tile wide">
           <div class="st-label">This month <span id="planMonthLabel">—</span> — live from Meta</div>
           <div class="mm-grid">
-            <div class="mm-cell"><div class="mm-label">Spent</div><div class="mm-val" id="mmSpend">—</div></div>
-            <div class="mm-cell"><div class="mm-label">Revenue made</div><div class="mm-val" id="mmRev">—</div></div>
-            <div class="mm-cell"><div class="mm-label">Customers</div><div class="mm-val" id="mmConv">—</div></div>
-            <div class="mm-cell mm-roas"><div class="mm-label">ROAS</div><div class="mm-val" id="mmRoas">—</div></div>
+            <div class="mm-cell">
+              <div class="mm-label">Spent</div><div class="mm-val" id="mmSpend">—</div>
+              <div class="mm-hint">Meta ad spend, 1st of the month → today</div>
+            </div>
+            <div class="mm-cell">
+              <div class="mm-label">Revenue made</div><div class="mm-val" id="mmRev">—</div>
+              <div class="mm-hint">Sales value Meta attributes to your ads</div>
+            </div>
+            <div class="mm-cell">
+              <div class="mm-label">Customers</div><div class="mm-val" id="mmConv">—</div>
+              <div class="mm-hint">Purchases counted so far — compared to target below</div>
+            </div>
+            <div class="mm-cell mm-roas">
+              <div class="mm-label">ROAS</div><div class="mm-val" id="mmRoas">—</div>
+              <div class="mm-hint">Revenue ÷ Spent — ₹ back per ₹1 spent</div>
+            </div>
           </div>
           <div class="st-sub" id="planMtdSub">Syncing from Meta — updates every 15 min</div>
           <div class="stat-progress-track"><div class="stat-progress-fill" id="planMtdFill" style="width:0%"></div></div>
           <div class="stat-progress-label" id="planMtdLabel">— / 100 customer target</div>
         </div>
         <div class="stat-tile">
-          <div class="st-label">September target</div>
+          <div class="st-label">September target <span style="text-transform:none; font-weight:600; color:var(--text-faint);">(planned, not live)</span></div>
           <div class="st-num">300<small>customers</small></div>
           <div class="st-sub">3.0× August's 100-customer target</div>
           <div class="stat-chip-row">
@@ -730,6 +744,7 @@ footer b{color:var(--text-muted);}
 
     <section class="sect">
       <div class="sect-head"><div class="sect-title">September Ad Budget Split</div><div class="sect-count">₹3,00,000</div></div>
+      <div class="sect-desc" style="margin-bottom:12px;">How the ₹3,00,000 September ad budget is planned to divide across the two platforms.</div>
       <div class="budget-bar">
         <div class="budget-seg meta" style="width:83.3%">₹2,50,000 · 83%</div>
         <div class="budget-seg google" style="width:16.7%">₹50,000 · 17%</div>
@@ -742,6 +757,7 @@ footer b{color:var(--text-muted);}
 
     <section class="sect">
       <div class="sect-head"><div class="sect-title">Meta — Campaign Structure</div><div class="sect-count">Aug → Sep</div></div>
+      <div class="sect-desc" style="margin-bottom:12px;">Grey bar = what's running right now. Orange bar = how much you're scaling up each ad-set type for September.</div>
       <div class="stat-chip-row" style="margin-bottom:16px;">
         <div class="stat-chip">Audiences running now <b>2</b></div>
         <div class="stat-chip">Total ad sets, Aug <b>11</b></div>
