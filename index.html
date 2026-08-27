@@ -379,6 +379,7 @@ footer b{color:var(--text-muted);}
 /* ---------- placeholder / draft data marker ---------- */
 .ph-pill{display:inline-block; background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn-line); border-radius:20px; padding:1px 9px; font:700 9.5px var(--body); text-transform:uppercase; letter-spacing:.04em; margin-left:6px; vertical-align:middle;}
 .real-pill{display:inline-block; background:var(--good-bg); color:var(--good); border:1px solid var(--good-line); border-radius:20px; padding:1px 9px; font:700 9.5px var(--body); text-transform:uppercase; letter-spacing:.04em; margin-left:6px; vertical-align:middle;}
+.stuck-pill{display:inline-block; background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn-line); border-radius:20px; padding:1px 9px; font:700 9.5px var(--body); text-transform:uppercase; letter-spacing:.04em; margin-left:6px; vertical-align:middle;}
 .ph-row td{color:var(--text-faint); font-style:italic;}
 .draft-banner{background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn); border-radius:var(--radius-sm); padding:10px 14px; font-size:12px; font-weight:600; margin-bottom:16px;}
 
@@ -896,36 +897,63 @@ footer b{color:var(--text-muted);}
       </div>
     </header>
 
-    <div class="draft-banner">🚧 Early draft. Ad spend and ad-attributed revenue below are real, live numbers. COGS and other operating costs are placeholders — tell me the real figures and this becomes a true P&amp;L.</div>
+    <div class="draft-banner">📊 Real numbers, pulled from Shopify (orders) and Shiprocket (shipping), Aug 1–27. Ad spend is live from Meta. Six specific products still need a cost figure from you — see the bottom of this page — everything else here is real.</div>
 
     <section class="sect">
-      <div class="sect-head"><div class="sect-title">August 2026, Month-to-Date</div><div class="sect-count" id="pnlAsOf">—</div></div>
+      <div class="sect-head"><div class="sect-title">August 2026, Aug 1 → Aug 27</div><div class="sect-count" id="pnlAsOf">—</div></div>
+      <div class="mm-grid">
+        <div class="mm-cell"><div class="mm-label">Shopify Revenue</div><div class="mm-val">₹1,10,030</div><div class="mm-hint">83 orders, cancelled excluded</div></div>
+        <div class="mm-cell"><div class="mm-label">Money Stuck</div><div class="mm-val" style="color:var(--warn);">₹53,714</div><div class="mm-hint">43 COD orders, not collected yet</div></div>
+        <div class="mm-cell"><div class="mm-label">Ad Spend</div><div class="mm-val" id="pnlAdSpend">—</div><div class="mm-hint">Meta live + ₹11,000 Google</div></div>
+        <div class="mm-cell"><div class="mm-label">Net Result</div><div class="mm-val" id="pnlNet" style="color:var(--bad);">—</div><div class="mm-hint">Revenue minus everything below</div></div>
+      </div>
+
       <div class="table-wrap"><table class="pnl-table">
         <tbody>
-          <tr><td>Ad-attributed revenue (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">—</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta revenue (live)</td><td class="pnl-num" id="pnlRevMeta">—</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google revenue (entered)</td><td class="pnl-num">₹2,500</td></tr>
-          <tr class="ph-row"><td>Cost of goods sold (COGS) <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
-          <tr class="budget-total-row"><td>Gross profit</td><td class="pnl-num">—</td></tr>
-          <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend">—</td></tr>
+          <tr><td>Shopify revenue — non-cancelled orders <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,10,030</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Paid (cash in hand)</td><td class="pnl-num">₹47,153</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Pending / COD — "stuck" money, not collected</td><td class="pnl-num" style="color:var(--warn);">₹53,714</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Partially refunded</td><td class="pnl-num">₹9,163</td></tr>
+          <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span> <span class="stuck-pill">Partial</span></td><td class="pnl-num">₹50,397.50</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ 30 units still uncosted (see below) — not included</td><td class="pnl-num">—</td></tr>
+          <tr class="pnl-neg"><td>Packaging — ₹20 × 122 units <span class="real-pill">Real</span></td><td class="pnl-num">₹2,440</td></tr>
+          <tr class="pnl-neg"><td>Shipping (Shiprocket, 78 shipments) <span class="real-pill">Real</span></td><td class="pnl-num">₹14,322.85</td></tr>
+          <tr class="budget-total-row"><td>Gross profit before ads (known-cost basis)</td><td class="pnl-num">₹42,869.70</td></tr>
+          <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend2">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta spend (live)</td><td class="pnl-num" id="pnlSpendMeta">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google spend (entered)</td><td class="pnl-num">₹11,000</td></tr>
-          <tr class="ph-row"><td>Other operating costs — shipping, packaging, payment gateway fees, salaries, event costs <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
-          <tr class="budget-total-row"><td>Net profit</td><td class="pnl-num">—</td></tr>
+          <tr class="ph-row"><td>Other operating costs — salaries, gateway fees, event costs <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
+          <tr class="budget-total-row"><td>Net result, Aug so far</td><td class="pnl-num" id="pnlNet2">—</td></tr>
         </tbody>
       </table></div>
-      <div class="sect-desc" style="margin-top:12px;">"Ad-attributed revenue" is what Meta/Google report as sales from ads — it isn't necessarily your total Shopify revenue (organic/direct traffic isn't counted here). Once COGS and other costs are known, gross profit and net profit will calculate automatically.</div>
+      <div class="sect-desc" style="margin-top:12px;">This is your real order book, not ad-platform self-reported revenue — it includes every non-cancelled Shopify order, whether it came from ads, organic, or direct. "Money stuck" is revenue you've booked a sale on but haven't actually been paid for yet (COD orders awaiting collection) — worth watching separately from the P&amp;L line above, since it affects your cash position right now, not just your monthly profit.</div>
     </section>
 
     <section class="sect">
-      <div class="sect-head"><div class="sect-title">What's Needed to Complete This</div></div>
+      <div class="sect-head"><div class="sect-title">Six Products Still Need a Real Cost Number</div></div>
+      <div class="sect-desc" style="margin-bottom:10px;">Your Floor Price sheet doesn't have a usable cost for these — either it's missing entirely, or the number on file is actually higher than what you sell the item for (which can't be right). 30 units sold this month fall into this gap, so the COGS above is understated by whatever these actually cost you.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Product</th><th>Issue</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="ph-row"><td>A2 Desi Cow Ghee</td><td>No floor cost on file at all</td><td><span class="ph-pill">Needed</span></td></tr>
+          <tr class="ph-row"><td>Homemade Dates Laddoo</td><td>No floor cost on file at all</td><td><span class="ph-pill">Needed</span></td></tr>
+          <tr class="ph-row"><td>Premium Pecan Nuts (250g)</td><td>Sheet says ₹1,880 floor cost — but it sells for ₹649–750</td><td><span class="ph-pill">Needs correction</span></td></tr>
+          <tr class="ph-row"><td>Selenium-Rich Brazil Nuts (250g)</td><td>Sheet says ₹3,100 floor cost — but it sells for ₹1,150</td><td><span class="ph-pill">Needs correction</span></td></tr>
+          <tr class="ph-row"><td>Crunchy Hazelnuts (250g)</td><td>Sheet says ₹250 floor cost for a 100g reference — actual 250g cost unclear</td><td><span class="ph-pill">Needs correction</span></td></tr>
+          <tr class="ph-row"><td>Premium Pine Nuts / Chilgoza (250g)</td><td>Sheet says ₹500 floor cost for a 100g reference — actual 250g cost unclear</td><td><span class="ph-pill">Needs correction</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><div class="sect-title">What's Still Needed to Fully Close This</div></div>
       <div class="plan-summary">
         <ul>
-          <li><b>COGS</b> — your per-order or blended cost of goods (dry fruits, ghee, laddu, packaging) as a % of revenue or a fixed ₹ per order.</li>
-          <li><b>Shipping &amp; fulfillment cost</b> — average cost per order shipped.</li>
-          <li><b>Payment gateway fees</b> — % charged by your payment processor (Razorpay/etc.).</li>
+          <li><b>The six product costs above</b> — real per-unit cost for Ghee, Dates Laddoo, and corrected 250g costs for Pecan/Brazil/Hazelnut/Pine Nuts.</li>
+          <li><b>Payment gateway fees</b> — % charged by your payment processor (Razorpay/etc.) — currently not deducted anywhere.</li>
           <li><b>Salaries / contractor costs</b> — monthly team cost, if you want it folded into this P&amp;L.</li>
           <li><b>Event &amp; one-off costs</b> — e.g. the UPITS booth budget, when it should count against a given month.</li>
+          <li><b>Live Shopify + Shiprocket refresh</b> — right now this section is a manual pull as of Aug 27; wiring it into the auto-refresh pipeline is a separate step if you want it updating every 15 minutes like the Meta numbers.</li>
         </ul>
       </div>
     </section>
@@ -1649,25 +1677,41 @@ buildLibrary();
   var GOOGLE_AUG_SPEND = 11000;
   var GOOGLE_AUG_REV = 2500;
 
+  // Real snapshot pulled from Shopify + Shiprocket, Aug 1-27 (manual pull, not yet on the 15-min refresh)
+  var SHOPIFY_AUG_REVENUE = 110030.05;
+  var KNOWN_COGS = 50397.50;
+  var PACKAGING_COST = 2440;
+  var SHIPPING_COST = 14322.85;
+
   function money(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
 
   if (mtd) {
     var metaSpend = mtd.spend || 0;
     var metaRev = mtd.rev || 0;
-    var totalRevenue = metaRev + GOOGLE_AUG_REV;
     var totalAdSpend = metaSpend + GOOGLE_AUG_SPEND;
+    var grossBeforeAds = SHOPIFY_AUG_REVENUE - KNOWN_COGS - PACKAGING_COST - SHIPPING_COST;
+    var netResult = grossBeforeAds - totalAdSpend;
 
     var asOf = document.getElementById('pnlAsOf');
     if (asOf) asOf.textContent = mtd.since + ' → ' + mtd.until;
 
     var revEl = document.getElementById('pnlRevenue');
-    if (revEl) revEl.textContent = money(totalRevenue);
-    var revMetaEl = document.getElementById('pnlRevMeta');
-    if (revMetaEl) revMetaEl.textContent = money(metaRev);
-    var spendEl = document.getElementById('pnlAdSpend');
-    if (spendEl) spendEl.textContent = money(totalAdSpend);
+    if (revEl) revEl.textContent = money(SHOPIFY_AUG_REVENUE);
+
+    ['pnlAdSpend','pnlAdSpend2'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.textContent = money(totalAdSpend);
+    });
     var spendMetaEl = document.getElementById('pnlSpendMeta');
     if (spendMetaEl) spendMetaEl.textContent = money(metaSpend);
+
+    ['pnlNet','pnlNet2'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) {
+        el.textContent = (netResult < 0 ? '-' : '') + money(Math.abs(netResult));
+        el.style.color = netResult < 0 ? 'var(--bad)' : 'var(--good)';
+      }
+    });
 
     var newCustEl = document.getElementById('ltvNewCust');
     if (newCustEl) newCustEl.textContent = Math.round((mtd.conv || 0) + 4); // + 4 Google customers (entered)
