@@ -910,7 +910,7 @@ footer b{color:var(--text-muted);}
       </div>
     </header>
 
-    <div class="draft-banner">📊 Real numbers, pulled from Shopify (orders) and Shiprocket (shipping), Aug 1–27. Ad spend is live from Meta. Six specific products still need a cost figure from you — see the bottom of this page — everything else here is real.</div>
+    <div class="draft-banner" style="background:var(--good-bg); border-color:var(--good-line); color:var(--good);">📊 Fully real. Revenue and product cost from Shopify, shipping from Shiprocket, ad spend live from Meta — every product now has a real cost. Only salaries, gateway fees and event costs are still outside this P&amp;L.</div>
 
     <section class="sect">
       <div class="sect-head"><div class="sect-title">August 2026, Aug 1 → Aug 27</div><div class="sect-count" id="pnlAsOf">—</div></div>
@@ -933,7 +933,7 @@ footer b{color:var(--text-muted);}
       <div class="chart-block">
         <div class="chart-title">P&amp;L waterfall — Aug 1–27</div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">Net revenue</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:100%; background:var(--accent);"></div></div><div class="pnl-chart-val">₹1,08,197</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Product cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:46.6%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹50,398</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Product cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:61.3%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹66,334</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Packaging</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:2.3%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹2,440</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Shipping</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:13.2%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹14,323</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Ad spend</div><div class="pnl-chart-track"><div class="pnl-chart-fill" id="pnlChartAdSpend" style="width:0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val" id="pnlChartAdSpendVal">—</div></div>
@@ -947,11 +947,10 @@ footer b{color:var(--text-muted);}
           <tr><td>Net revenue <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,08,197</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Collected (paid in full or net of refund)</td><td class="pnl-num">₹54,483</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Pending / COD — "stuck" money, not collected</td><td class="pnl-num" style="color:var(--warn);">₹53,714</td></tr>
-          <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span> <span class="stuck-pill">Partial</span></td><td class="pnl-num">₹50,397.50</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ 30 units still uncosted (see below) — not included</td><td class="pnl-num">—</td></tr>
+          <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span></td><td class="pnl-num">₹66,334.25</td></tr>
           <tr class="pnl-neg"><td>Packaging — ₹20 × 122 units <span class="real-pill">Real</span></td><td class="pnl-num">₹2,440</td></tr>
           <tr class="pnl-neg"><td>Shipping (Shiprocket, 78 shipments) <span class="real-pill">Real</span></td><td class="pnl-num">₹14,322.85</td></tr>
-          <tr class="budget-total-row"><td>Gross profit before ads (known-cost basis)</td><td class="pnl-num">₹41,036.70</td></tr>
+          <tr class="budget-total-row"><td>Gross profit before ads</td><td class="pnl-num">₹25,099.95</td></tr>
           <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend2">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta spend (live)</td><td class="pnl-num" id="pnlSpendMeta">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google spend (entered)</td><td class="pnl-num">₹11,000</td></tr>
@@ -963,17 +962,17 @@ footer b{color:var(--text-muted);}
     </section>
 
     <section class="sect">
-      <div class="sect-head"><div class="sect-title">Six Products Still Need a Real Cost Number</div></div>
-      <div class="sect-desc" style="margin-bottom:10px;">Your Floor Price sheet doesn't have a usable cost for these — either it's missing entirely, or the number on file is actually higher than what you sell the item for (which can't be right). 30 units sold this month fall into this gap, so the COGS above is understated by whatever these actually cost you.</div>
+      <div class="sect-head"><div class="sect-title">Product Cost Coverage</div></div>
+      <div class="sect-desc" style="margin-bottom:10px;">All 122 units sold in August now have a real per-unit cost — the six products below were the last gaps, filled in with your per-kg pricing.</div>
       <div class="table-wrap"><table>
-        <thead><tr><th>Product</th><th>Issue</th><th>Status</th></tr></thead>
+        <thead><tr><th>Product</th><th>Your cost (per kg)</th><th>Cost as sold</th><th>Status</th></tr></thead>
         <tbody>
-          <tr class="ph-row"><td>A2 Desi Cow Ghee</td><td>No floor cost on file at all</td><td><span class="ph-pill">Needed</span></td></tr>
-          <tr class="ph-row"><td>Homemade Dates Laddoo</td><td>No floor cost on file at all</td><td><span class="ph-pill">Needed</span></td></tr>
-          <tr class="ph-row"><td>Premium Pecan Nuts (250g)</td><td>Sheet says ₹1,880 floor cost — but it sells for ₹649–750</td><td><span class="ph-pill">Needs correction</span></td></tr>
-          <tr class="ph-row"><td>Selenium-Rich Brazil Nuts (250g)</td><td>Sheet says ₹3,100 floor cost — but it sells for ₹1,150</td><td><span class="ph-pill">Needs correction</span></td></tr>
-          <tr class="ph-row"><td>Crunchy Hazelnuts (250g)</td><td>Sheet says ₹250 floor cost for a 100g reference — actual 250g cost unclear</td><td><span class="ph-pill">Needs correction</span></td></tr>
-          <tr class="ph-row"><td>Premium Pine Nuts / Chilgoza (250g)</td><td>Sheet says ₹500 floor cost for a 100g reference — actual 250g cost unclear</td><td><span class="ph-pill">Needs correction</span></td></tr>
+          <tr><td>A2 Desi Cow Ghee</td><td class="pnl-num">₹1,000</td><td>₹500 / 500ml, ₹250 / 250ml</td><td><span class="real-pill">Real</span></td></tr>
+          <tr><td>Homemade Dates Laddoo</td><td class="pnl-num">₹1,000</td><td>₹500 / 500g, ₹250 / 250g</td><td><span class="real-pill">Real</span></td></tr>
+          <tr><td>Premium Pecan Nuts</td><td class="pnl-num">₹1,974</td><td>₹493.50 / 250g</td><td><span class="real-pill">Real</span></td></tr>
+          <tr><td>Selenium-Rich Brazil Nuts</td><td class="pnl-num">₹3,335</td><td>₹833.75 / 250g</td><td><span class="real-pill">Real</span></td></tr>
+          <tr><td>Crunchy Hazelnuts</td><td class="pnl-num">₹2,499</td><td>₹624.75 / 250g</td><td><span class="real-pill">Real</span></td></tr>
+          <tr><td>Premium Pine Nuts (Chilgoza)</td><td class="pnl-num">₹4,350</td><td>₹1,087.50 / 250g</td><td><span class="real-pill">Real</span></td></tr>
         </tbody>
       </table></div>
     </section>
@@ -982,7 +981,6 @@ footer b{color:var(--text-muted);}
       <div class="sect-head"><div class="sect-title">What's Still Needed to Fully Close This</div></div>
       <div class="plan-summary">
         <ul>
-          <li><b>The six product costs above</b> — real per-unit cost for Ghee, Dates Laddoo, and corrected 250g costs for Pecan/Brazil/Hazelnut/Pine Nuts.</li>
           <li><b>Payment gateway fees</b> — % charged by your payment processor (Razorpay/etc.) — currently not deducted anywhere.</li>
           <li><b>Salaries / contractor costs</b> — monthly team cost, if you want it folded into this P&amp;L.</li>
           <li><b>Event &amp; one-off costs</b> — e.g. the UPITS booth budget, when it should count against a given month.</li>
@@ -1713,7 +1711,7 @@ buildLibrary();
   // Real snapshot pulled from Shopify + Shiprocket, Aug 1-27 (manual pull, not yet on the 15-min refresh)
   // SHOPIFY_AUG_REVENUE is NET of the one refund issued this month (gross ₹1,10,030.05 - ₹1,833 refund)
   var SHOPIFY_AUG_REVENUE = 108197.05;
-  var KNOWN_COGS = 50397.50;
+  var KNOWN_COGS = 66334.25; // all 122 units now have a real per-unit cost
   var PACKAGING_COST = 2440;
   var SHIPPING_COST = 14322.85;
   var CHART_MAX = SHOPIFY_AUG_REVENUE; // waterfall bars scale against net revenue
