@@ -2,7 +2,7 @@ name: Refresh Meta Ads data
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes
+    - cron: "0 1 * * *"   # once a day, 1:00 UTC = 6:30 AM IST
   workflow_dispatch: {}       # allows manual "Run workflow" trigger too
 
 permissions:
