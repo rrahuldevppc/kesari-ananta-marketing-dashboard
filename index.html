@@ -910,24 +910,35 @@ footer b{color:var(--text-muted);}
       </div>
     </header>
 
-    <div class="draft-banner" style="background:var(--good-bg); border-color:var(--good-line); color:var(--good);">📊 Fully real. Revenue and product cost from Shopify, shipping from Shiprocket, ad spend live from Meta — every product now has a real cost. Only salaries, gateway fees and event costs are still outside this P&amp;L.</div>
+    <div class="draft-banner" style="background:var(--good-bg); border-color:var(--good-line); color:var(--good);">📊 Fully real, full-month close. Revenue, product cost and delivery status from Shopify + Shiprocket, ad spend live from Meta, plus gateway fees and the full August team cost. Only one-off event costs are still outside this P&amp;L.</div>
 
     <section class="sect">
       <div class="sect-head"><div class="sect-title">August 2026, Aug 1 → Aug 31 (full month, ads stopped Aug 31)</div><div class="sect-count" id="pnlAsOf">—</div></div>
       <div class="mm-grid">
         <div class="mm-cell"><div class="mm-label">Net Revenue</div><div class="mm-val">₹1,38,159</div><div class="mm-hint">113 orders, after 1 refund</div></div>
-        <div class="mm-cell"><div class="mm-label">Money Stuck</div><div class="mm-val" style="color:var(--warn);">₹73,107</div><div class="mm-hint">64 COD orders, not collected yet</div></div>
+        <div class="mm-cell"><div class="mm-label">Lost to RTO</div><div class="mm-val" style="color:var(--bad);">₹8,880</div><div class="mm-hint">7 orders, courier-confirmed returns</div></div>
         <div class="mm-cell"><div class="mm-label">Ad Spend</div><div class="mm-val" id="pnlAdSpend">—</div><div class="mm-hint">Meta live + ₹11,000 Google</div></div>
         <div class="mm-cell"><div class="mm-label">Net Result</div><div class="mm-val" id="pnlNet" style="color:var(--bad);">—</div><div class="mm-hint">Revenue minus everything below</div></div>
       </div>
 
       <div class="chart-block">
-        <div class="chart-title">Where the ₹1,38,159 in revenue actually sits</div>
+        <div class="chart-title">Where the ₹1,38,159 in revenue physically stands (Shiprocket delivery status)</div>
         <div class="split-bar">
-          <div class="split-seg" style="width:47.1%; background:var(--good);">Collected · ₹65,052 · 47%</div>
-          <div class="split-seg" style="width:52.9%; background:var(--warn); color:#3a2a05;">Stuck (COD) · ₹73,107 · 53%</div>
+          <div class="split-seg" style="width:42.3%; background:var(--good);">Delivered · ₹58,431 · 42%</div>
+          <div class="split-seg" style="width:17.2%; background:var(--accent); color:#fff;">In transit · ₹23,837 · 17%</div>
+          <div class="split-seg" style="width:34.1%; background:var(--warn); color:#3a2a05;">Not shipped yet · ₹47,011 · 34%</div>
+          <div class="split-seg" style="width:6.4%; background:var(--bad); color:#fff;">RTO (lost) · ₹8,880 · 6%</div>
         </div>
-        <div class="chart-foot">+ ₹1,833 already refunded on 1 order (Aug 18, #1059) — excluded from revenue above, not part of either segment.</div>
+        <div class="chart-foot">"Not shipped yet" includes 7 orders Shopify shows as Fulfilled but with no Shiprocket AWB found — likely merged into another shipment; worth a quick check. + ₹1,833 already refunded on #1059 — excluded from revenue above.</div>
+      </div>
+
+      <div class="chart-block">
+        <div class="chart-title">Payment status — what's actually been collected</div>
+        <div class="split-bar">
+          <div class="split-seg" style="width:47.1%; background:var(--good);">Paid / secure · ₹65,052 · 47%</div>
+          <div class="split-seg" style="width:52.9%; background:var(--warn); color:#3a2a05;">COD, not yet collected · ₹73,107 · 53%</div>
+        </div>
+        <div class="chart-foot">Of the ₹73,107 still COD, ₹8,880 (7 orders) has already RTO'd and won't convert — the realistic "still in play" COD balance is ≈ ₹64,227.</div>
       </div>
 
       <div class="chart-block">
@@ -937,6 +948,8 @@ footer b{color:var(--text-muted);}
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Packaging</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:2.3%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹3,200</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Shipping</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:13.7%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹18,923</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Ad spend</div><div class="pnl-chart-track"><div class="pnl-chart-fill" id="pnlChartAdSpend" style="width:0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val" id="pnlChartAdSpendVal">—</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Gateway fees</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:0.9%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹1,301</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Team cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:36.2%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹50,000</div></div>
         <div class="pnl-chart-row pnl-chart-net"><div class="pnl-chart-label">= Net result</div><div class="pnl-chart-track"><div class="pnl-chart-fill" id="pnlChartNet" style="width:0%; background:var(--bad);"></div></div><div class="pnl-chart-val" id="pnlChartNetVal">—</div></div>
       </div>
 
@@ -945,8 +958,9 @@ footer b{color:var(--text-muted);}
           <tr><td>Shopify gross order value (before refunds) <span class="real-pill">Real</span></td><td class="pnl-num">₹1,39,992</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Refunded (1 order, Aug 18, #1059)</td><td class="pnl-num" style="color:var(--bad);">−₹1,833</td></tr>
           <tr><td>Net revenue <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,38,159</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Collected (paid in full or net of refund)</td><td class="pnl-num">₹65,052</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Pending / COD — "stuck" money, not collected</td><td class="pnl-num" style="color:var(--warn);">₹73,107</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Paid / secure</td><td class="pnl-num">₹65,052</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ COD, not yet collected</td><td class="pnl-num" style="color:var(--warn);">₹73,107</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ of which already RTO'd (lost)</td><td class="pnl-num" style="color:var(--bad);">₹8,880</td></tr>
           <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span></td><td class="pnl-num">₹84,584.50</td></tr>
           <tr class="pnl-neg"><td>Packaging — ₹20 × 160 units <span class="real-pill">Real</span></td><td class="pnl-num">₹3,200</td></tr>
           <tr class="pnl-neg"><td>Shipping (Shiprocket, 100 shipments) <span class="real-pill">Real</span></td><td class="pnl-num">₹18,922.87</td></tr>
@@ -954,11 +968,13 @@ footer b{color:var(--text-muted);}
           <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend2">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta spend (live)</td><td class="pnl-num" id="pnlSpendMeta">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google spend (entered)</td><td class="pnl-num">₹11,000</td></tr>
-          <tr class="ph-row"><td>Other operating costs — salaries, gateway fees, event costs <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
+          <tr class="pnl-neg"><td>Payment gateway fees — 2% of ₹65,052 paid <span class="real-pill">Real</span></td><td class="pnl-num">₹1,301.04</td></tr>
+          <tr class="pnl-neg"><td>Team cost — August <span class="real-pill">Real</span></td><td class="pnl-num">₹50,000</td></tr>
+          <tr class="ph-row"><td>Other one-off costs — events, etc. <span class="ph-pill">Placeholder</span></td><td class="pnl-num">—</td></tr>
           <tr class="budget-total-row"><td>Net result, Aug 1–31</td><td class="pnl-num" id="pnlNet2">—</td></tr>
         </tbody>
       </table></div>
-      <div class="sect-desc" style="margin-top:12px;">This is your real order book, not ad-platform self-reported revenue — it includes every non-cancelled Shopify order, whether it came from ads, organic, or direct, net of the one refund issued this month. "Money stuck" is revenue you've booked a sale on but haven't actually been paid for yet (COD orders awaiting collection) — worth watching separately from the P&amp;L line above, since it affects your cash position right now, not just your monthly profit. All ads (Meta + Google) were stopped on Aug 31 — this is the full-month close.</div>
+      <div class="sect-desc" style="margin-top:12px;">This is your real order book, not ad-platform self-reported revenue — it includes every non-cancelled Shopify order, net of the one refund issued this month. Delivery status comes straight from Shiprocket's own tracking (not just Shopify's "Fulfilled" flag), so "Not shipped yet" and "RTO" reflect what's actually happened to the package, not just whether a label was printed. All ads (Meta + Google) were stopped on Aug 31 — this is the full-month close.</div>
     </section>
 
     <section class="sect">
@@ -978,11 +994,46 @@ footer b{color:var(--text-muted);}
     </section>
 
     <section class="sect">
+      <div class="sect-head"><div class="sect-title">Sales by Product — Aug 1–31</div></div>
+      <div class="sect-desc" style="margin-bottom:10px;">Line-item revenue by product, all 113 orders. Sums to ₹1,42,478 — about ₹2,486 above the ₹1,39,992 order-level gross, because a handful of orders carried an order-level discount code that doesn't show at the line-item level. Use this for "what's selling," not as the revenue figure.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Product</th><th>Units</th><th>Revenue</th></tr></thead>
+        <tbody>
+          <tr><td>Premium Ajwa Dates</td><td class="pnl-num">37</td><td class="pnl-num">₹47,360</td></tr>
+          <tr><td>Premium Pecan Nuts</td><td class="pnl-num">25</td><td class="pnl-num">₹18,245</td></tr>
+          <tr><td>Rich Mamra Almonds</td><td class="pnl-num">9</td><td class="pnl-num">₹14,297</td></tr>
+          <tr><td>Crunchy Jumbo Cashews W180</td><td class="pnl-num">10</td><td class="pnl-num">₹9,111</td></tr>
+          <tr><td>Wholesome Seed Mix</td><td class="pnl-num">15</td><td class="pnl-num">₹8,410</td></tr>
+          <tr><td>Premium Pine Nuts (Chilgoza)</td><td class="pnl-num">5</td><td class="pnl-num">₹7,250</td></tr>
+          <tr><td>Selenium-Rich Brazil Nuts</td><td class="pnl-num">5</td><td class="pnl-num">₹5,750</td></tr>
+          <tr><td>Soft Medjool Dates</td><td class="pnl-num">3</td><td class="pnl-num">₹5,430</td></tr>
+          <tr><td>Homemade Dates Laddoo</td><td class="pnl-num">4</td><td class="pnl-num">₹5,100</td></tr>
+          <tr><td>Wholesome Trail Mix</td><td class="pnl-num">7</td><td class="pnl-num">₹3,050</td></tr>
+          <tr><td>Omega-3 Rich Chia Seeds</td><td class="pnl-num">7</td><td class="pnl-num">₹2,630</td></tr>
+          <tr><td>A2 Desi Cow Ghee</td><td class="pnl-num">3</td><td class="pnl-num">₹1,950</td></tr>
+          <tr><td>Protein-Rich Pumpkin Seeds</td><td class="pnl-num">3</td><td class="pnl-num">₹1,790</td></tr>
+          <tr><td>Dark Fard Dates</td><td class="pnl-num">3</td><td class="pnl-num">₹1,650</td></tr>
+          <tr><td>Roasted &amp; Salted Pistachios</td><td class="pnl-num">1</td><td class="pnl-num">₹1,209</td></tr>
+          <tr><td>Crunchy Sanora Almonds</td><td class="pnl-num">2</td><td class="pnl-num">₹1,180</td></tr>
+          <tr><td>Sweet Black Raisins (Seedless)</td><td class="pnl-num">4</td><td class="pnl-num">₹1,117</td></tr>
+          <tr><td>Soft Kalmi Dates</td><td class="pnl-num">1</td><td class="pnl-num">₹1,090</td></tr>
+          <tr><td>Creamy Whole Cashew W210</td><td class="pnl-num">2</td><td class="pnl-num">₹1,086</td></tr>
+          <tr><td>Sweet Green Raisins (Small)</td><td class="pnl-num">3</td><td class="pnl-num">₹1,038</td></tr>
+          <tr><td>Crunchy Roasted Cashews</td><td class="pnl-num">2</td><td class="pnl-num">₹900</td></tr>
+          <tr><td>Vitamin E Rich Sunflower Seeds</td><td class="pnl-num">4</td><td class="pnl-num">₹700</td></tr>
+          <tr><td>Fiber-Rich Flax Seeds</td><td class="pnl-num">2</td><td class="pnl-num">₹620</td></tr>
+          <tr><td>Soft Kandhari Raisins</td><td class="pnl-num">1</td><td class="pnl-num">₹585</td></tr>
+          <tr><td>Crunchy Hazelnuts</td><td class="pnl-num">1</td><td class="pnl-num">₹550</td></tr>
+          <tr><td>Crunchy California Almonds</td><td class="pnl-num">1</td><td class="pnl-num">₹380</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="sect">
       <div class="sect-head"><div class="sect-title">What's Still Needed to Fully Close This</div></div>
       <div class="plan-summary">
         <ul>
-          <li><b>Payment gateway fees</b> — % charged by your payment processor (Razorpay/etc.) — currently not deducted anywhere.</li>
-          <li><b>Salaries / contractor costs</b> — monthly team cost, if you want it folded into this P&amp;L.</li>
+          <li><b>7 self-fulfilled orders with no Shiprocket AWB</b> — #1037, #1042, #1107, #1120, #1136, #1137, #1147 (₹5,564 total) show as Fulfilled in Shopify but have no traceable shipment in Shiprocket's own records; currently counted as delivered on the assumption they shipped some other way. Worth a quick check on your end.</li>
           <li><b>Event &amp; one-off costs</b> — e.g. the UPITS booth budget, when it should count against a given month.</li>
           <li><b>Live Shopify + Shiprocket refresh</b> — right now this section is a manual pull as of Aug 31; wiring it into the auto-refresh pipeline is a separate step if you want it updating automatically alongside the Meta numbers.</li>
         </ul>
@@ -1714,6 +1765,8 @@ buildLibrary();
   var KNOWN_COGS = 84584.50; // all 160 units now have a real per-unit cost
   var PACKAGING_COST = 3200;
   var SHIPPING_COST = 18922.87;
+  var GATEWAY_FEES = 1301.04; // 2% of the ₹65,052.05 Paid/secure bucket
+  var TEAM_COST = 50000; // full August team cost
   var CHART_MAX = SHOPIFY_AUG_REVENUE; // waterfall bars scale against net revenue
 
   function money(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
@@ -1724,7 +1777,7 @@ buildLibrary();
     var metaRev = mtd.rev || 0;
     var totalAdSpend = metaSpend + GOOGLE_AUG_SPEND;
     var grossBeforeAds = SHOPIFY_AUG_REVENUE - KNOWN_COGS - PACKAGING_COST - SHIPPING_COST;
-    var netResult = grossBeforeAds - totalAdSpend;
+    var netResult = grossBeforeAds - totalAdSpend - GATEWAY_FEES - TEAM_COST;
 
     var asOf = document.getElementById('pnlAsOf');
     if (asOf) asOf.textContent = mtd.since + ' → ' + mtd.until;
