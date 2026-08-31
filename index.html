@@ -916,7 +916,7 @@ footer b{color:var(--text-muted);}
       <div class="sect-head"><div class="sect-title">August 2026, Aug 1 → Aug 31 (full month, ads stopped Aug 31)</div><div class="sect-count" id="pnlAsOf">—</div></div>
       <div class="mm-grid">
         <div class="mm-cell"><div class="mm-label">Net Revenue</div><div class="mm-val">₹1,38,159</div><div class="mm-hint">113 orders, after 1 refund</div></div>
-        <div class="mm-cell"><div class="mm-label">Lost to RTO</div><div class="mm-val" style="color:var(--bad);">₹8,880</div><div class="mm-hint">7 orders, courier-confirmed returns</div></div>
+        <div class="mm-cell"><div class="mm-label">RTO'd Orders</div><div class="mm-val" style="color:var(--warn);">₹8,880</div><div class="mm-hint">7 orders — product's back in stock, not a real loss</div></div>
         <div class="mm-cell"><div class="mm-label">Ad Spend</div><div class="mm-val" id="pnlAdSpend">—</div><div class="mm-hint">Meta live + ₹11,000 Google</div></div>
         <div class="mm-cell"><div class="mm-label">Net Result</div><div class="mm-val" id="pnlNet" style="color:var(--bad);">—</div><div class="mm-hint">Revenue minus everything below</div></div>
       </div>
@@ -927,9 +927,9 @@ footer b{color:var(--text-muted);}
           <div class="split-seg" style="width:42.3%; background:var(--good);">Delivered · ₹58,431 · 42%</div>
           <div class="split-seg" style="width:17.2%; background:var(--accent); color:#fff;">In transit · ₹23,837 · 17%</div>
           <div class="split-seg" style="width:34.1%; background:var(--warn); color:#3a2a05;">Not shipped yet · ₹47,011 · 34%</div>
-          <div class="split-seg" style="width:6.4%; background:var(--bad); color:#fff;">RTO (lost) · ₹8,880 · 6%</div>
+          <div class="split-seg" style="width:6.4%; background:var(--warn); color:#3a2a05;">RTO'd · ₹8,880 · 6%</div>
         </div>
-        <div class="chart-foot">"Not shipped yet" includes 7 orders Shopify shows as Fulfilled but with no Shiprocket AWB found — likely merged into another shipment; worth a quick check. + ₹1,833 already refunded on #1059 — excluded from revenue above.</div>
+        <div class="chart-foot">RTO'd isn't a real loss — the product comes back to stock, so only the extra return-leg freight is a genuine cost, and that's already inside the ₹18,923 shipping total above, not subtracted again separately. "Not shipped yet" includes 7 orders Shopify shows as Fulfilled but with no Shiprocket AWB found — likely merged into another shipment; worth a quick check. + ₹1,833 already refunded on #1059 — excluded from revenue above.</div>
       </div>
 
       <div class="chart-block">
@@ -938,7 +938,7 @@ footer b{color:var(--text-muted);}
           <div class="split-seg" style="width:47.1%; background:var(--good);">Paid / secure · ₹65,052 · 47%</div>
           <div class="split-seg" style="width:52.9%; background:var(--warn); color:#3a2a05;">COD, not yet collected · ₹73,107 · 53%</div>
         </div>
-        <div class="chart-foot">Of the ₹73,107 still COD, ₹8,880 (7 orders) has already RTO'd and won't convert — the realistic "still in play" COD balance is ≈ ₹64,227.</div>
+        <div class="chart-foot">Of the ₹73,107 still COD, ₹8,880 (7 orders) has already RTO'd — that revenue won't come in, but it's not a loss either, since the product is back in stock and can be sold again. The realistic "still in play, could still be collected" COD balance is ≈ ₹64,227.</div>
       </div>
 
       <div class="chart-block">
@@ -960,7 +960,7 @@ footer b{color:var(--text-muted);}
           <tr><td>Net revenue <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,38,159</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Paid / secure</td><td class="pnl-num">₹65,052</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ COD, not yet collected</td><td class="pnl-num" style="color:var(--warn);">₹73,107</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ of which already RTO'd (lost)</td><td class="pnl-num" style="color:var(--bad);">₹8,880</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ of which already RTO'd (product back in stock, not a loss)</td><td class="pnl-num" style="color:var(--warn);">₹8,880</td></tr>
           <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span></td><td class="pnl-num">₹84,584.50</td></tr>
           <tr class="pnl-neg"><td>Packaging — ₹20 × 160 units <span class="real-pill">Real</span></td><td class="pnl-num">₹3,200</td></tr>
           <tr class="pnl-neg"><td>Shipping (Shiprocket, 100 shipments) <span class="real-pill">Real</span></td><td class="pnl-num">₹18,922.87</td></tr>
