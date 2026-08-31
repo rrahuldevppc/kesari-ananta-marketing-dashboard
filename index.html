@@ -915,21 +915,21 @@ footer b{color:var(--text-muted);}
     <section class="sect">
       <div class="sect-head"><div class="sect-title">August 2026, Aug 1 → Aug 31 (full month, ads stopped Aug 31)</div><div class="sect-count" id="pnlAsOf">—</div></div>
       <div class="mm-grid">
-        <div class="mm-cell"><div class="mm-label">Net Revenue</div><div class="mm-val">₹1,38,159</div><div class="mm-hint">113 orders, after 1 refund</div></div>
+        <div class="mm-cell"><div class="mm-label">Net Revenue</div><div class="mm-val">₹1,35,027</div><div class="mm-hint">= Shopify Analytics "Total sales"</div></div>
         <div class="mm-cell"><div class="mm-label">RTO'd Orders</div><div class="mm-val" style="color:var(--warn);">₹8,880</div><div class="mm-hint">7 orders — product's back in stock, not a real loss</div></div>
         <div class="mm-cell"><div class="mm-label">Ad Spend</div><div class="mm-val" id="pnlAdSpend">—</div><div class="mm-hint">Meta live + ₹11,000 Google</div></div>
         <div class="mm-cell"><div class="mm-label">Net Result</div><div class="mm-val" id="pnlNet" style="color:var(--bad);">—</div><div class="mm-hint">Revenue minus everything below</div></div>
       </div>
 
       <div class="chart-block">
-        <div class="chart-title">Where the ₹1,38,159 in revenue physically stands (Shiprocket delivery status)</div>
+        <div class="chart-title">Where the ₹1,38,159 in still-valid orders physically stands (Shiprocket delivery status)</div>
         <div class="split-bar">
           <div class="split-seg" style="width:42.3%; background:var(--good);">Delivered · ₹58,431 · 42%</div>
           <div class="split-seg" style="width:17.2%; background:var(--accent); color:#fff;">In transit · ₹23,837 · 17%</div>
           <div class="split-seg" style="width:34.1%; background:var(--warn); color:#3a2a05;">Not shipped yet · ₹47,011 · 34%</div>
           <div class="split-seg" style="width:6.4%; background:var(--warn); color:#3a2a05;">RTO'd · ₹8,880 · 6%</div>
         </div>
-        <div class="chart-foot">RTO'd isn't a real loss — the product comes back to stock, so only the extra return-leg freight is a genuine cost, and that's already inside the ₹18,923 shipping total above, not subtracted again separately. "Not shipped yet" includes 7 orders Shopify shows as Fulfilled but with no Shiprocket AWB found — likely merged into another shipment; worth a quick check. + ₹1,833 already refunded on #1059 — excluded from revenue above.</div>
+        <div class="chart-foot">This chart and the payment-status one below are built from the 113 orders that are still live (₹1,38,159.05 total) — cancelled orders obviously can't be "delivered" or "in transit," so they're left out here. That's ₹3,132 above the ₹1,35,027 Net Revenue figure at the top, which is Shopify's own "Total sales" and already nets 28 cancelled orders back out through its own discounts/reversals math instead of excluding them outright — see the table below for the full reconciliation. RTO'd isn't a real loss — the product comes back to stock, so only the extra return-leg freight is a genuine cost, already inside the ₹18,923 shipping total, not subtracted again. "Not shipped yet" includes 7 orders Shopify shows as Fulfilled but with no Shiprocket AWB found — likely merged into another shipment; worth a quick check.</div>
       </div>
 
       <div class="chart-block">
@@ -943,28 +943,31 @@ footer b{color:var(--text-muted);}
 
       <div class="chart-block">
         <div class="chart-title">P&amp;L waterfall — Aug 1–31</div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">Net revenue</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:100%; background:var(--accent);"></div></div><div class="pnl-chart-val">₹1,38,159</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Product cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:61.2%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹84,585</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Packaging</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:2.3%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹3,200</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Shipping</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:13.7%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹18,923</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">Net revenue</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:100%; background:var(--accent);"></div></div><div class="pnl-chart-val">₹1,35,027</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Product cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:62.6%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹84,585</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Packaging</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:2.4%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹3,200</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Shipping</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:14.0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹18,923</div></div>
         <div class="pnl-chart-row"><div class="pnl-chart-label">− Ad spend</div><div class="pnl-chart-track"><div class="pnl-chart-fill" id="pnlChartAdSpend" style="width:0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val" id="pnlChartAdSpendVal">—</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Gateway fees</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:0.9%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹1,301</div></div>
-        <div class="pnl-chart-row"><div class="pnl-chart-label">− Team cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:36.2%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹50,000</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Gateway fees</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:1.0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹1,301</div></div>
+        <div class="pnl-chart-row"><div class="pnl-chart-label">− Team cost</div><div class="pnl-chart-track"><div class="pnl-chart-fill" style="width:37.0%; background:var(--text-muted);"></div></div><div class="pnl-chart-val">₹50,000</div></div>
         <div class="pnl-chart-row pnl-chart-net"><div class="pnl-chart-label">= Net result</div><div class="pnl-chart-track"><div class="pnl-chart-fill" id="pnlChartNet" style="width:0%; background:var(--bad);"></div></div><div class="pnl-chart-val" id="pnlChartNetVal">—</div></div>
       </div>
 
       <div class="table-wrap"><table class="pnl-table">
         <tbody>
-          <tr><td>Shopify gross order value (before refunds) <span class="real-pill">Real</span></td><td class="pnl-num">₹1,39,992</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Refunded (1 order, Aug 18, #1059)</td><td class="pnl-num" style="color:var(--bad);">−₹1,833</td></tr>
-          <tr><td>Net revenue <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,38,159</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Paid / secure</td><td class="pnl-num">₹65,052</td></tr>
-          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ COD, not yet collected</td><td class="pnl-num" style="color:var(--warn);">₹73,107</td></tr>
+          <tr><td>Gross sales — all 141 orders placed, pre-discount <span class="real-pill">Real</span></td><td class="pnl-num">₹1,50,515.60</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Discounts</td><td class="pnl-num" style="color:var(--bad);">−₹3,813.04</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Sales reversals — 28 cancelled orders + the #1059 refund</td><td class="pnl-num" style="color:var(--bad);">−₹32,552.42</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Net sales</td><td class="pnl-num">₹1,14,150.14</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Taxes</td><td class="pnl-num">₹20,876.91</td></tr>
+          <tr><td>Net Revenue = Shopify "Total sales" <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlRevenue">₹1,35,027.05</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Of the 113 still-live orders (₹1,38,159.05): Paid / secure</td><td class="pnl-num">₹65,052</td></tr>
+          <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Of the 113 still-live orders: COD, not yet collected</td><td class="pnl-num" style="color:var(--warn);">₹73,107</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ of which already RTO'd (product back in stock, not a loss)</td><td class="pnl-num" style="color:var(--warn);">₹8,880</td></tr>
           <tr class="pnl-neg"><td>Product cost (COGS, floor price basis) <span class="real-pill">Real</span></td><td class="pnl-num">₹84,584.50</td></tr>
           <tr class="pnl-neg"><td>Packaging — ₹20 × 160 units <span class="real-pill">Real</span></td><td class="pnl-num">₹3,200</td></tr>
           <tr class="pnl-neg"><td>Shipping (Shiprocket, 100 shipments) <span class="real-pill">Real</span></td><td class="pnl-num">₹18,922.87</td></tr>
-          <tr class="budget-total-row"><td>Gross profit before ads</td><td class="pnl-num">₹31,451.68</td></tr>
+          <tr class="budget-total-row"><td>Gross profit before ads</td><td class="pnl-num">₹28,319.68</td></tr>
           <tr class="pnl-neg"><td>Ad spend (Meta + Google) <span class="real-pill">Real</span></td><td class="pnl-num" id="pnlAdSpend2">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Meta spend (live)</td><td class="pnl-num" id="pnlSpendMeta">—</td></tr>
           <tr class="pnl-sub"><td>&nbsp;&nbsp;↳ Google spend (entered)</td><td class="pnl-num">₹11,000</td></tr>
@@ -974,7 +977,7 @@ footer b{color:var(--text-muted);}
           <tr class="budget-total-row"><td>Net result, Aug 1–31</td><td class="pnl-num" id="pnlNet2">—</td></tr>
         </tbody>
       </table></div>
-      <div class="sect-desc" style="margin-top:12px;">This is your real order book, not ad-platform self-reported revenue — it includes every non-cancelled Shopify order, net of the one refund issued this month. Delivery status comes straight from Shiprocket's own tracking (not just Shopify's "Fulfilled" flag), so "Not shipped yet" and "RTO" reflect what's actually happened to the package, not just whether a label was printed. All ads (Meta + Google) were stopped on Aug 31 — this is the full-month close.</div>
+      <div class="sect-desc" style="margin-top:12px;">Net Revenue now matches Shopify Analytics' own "Total sales" number exactly (₹1,35,027.05) — no more guessing which figure to trust. Costs (COGS, packaging, shipping) and the delivery/payment breakdowns are still built from the 113 orders that are actually still live, which total ₹1,38,159.05 — the reconciliation rows above show exactly how Shopify gets from its 141-order gross figure down to the same ballpark through discounts, reversals and tax. Delivery status comes straight from Shiprocket's own tracking (not just Shopify's "Fulfilled" flag), so "Not shipped yet" and "RTO" reflect what's actually happened to the package. All ads (Meta + Google) were stopped on Aug 31 — this is the full-month close.</div>
     </section>
 
     <section class="sect">
@@ -1761,8 +1764,8 @@ buildLibrary();
   var GOOGLE_AUG_REV = 2500;
 
   // Real snapshot pulled from Shopify + Shiprocket, Aug 1-31, full month close (manual pull, not yet on the daily refresh)
-  // SHOPIFY_AUG_REVENUE is NET of the one refund issued this month (gross ₹1,39,992.05 - ₹1,833 refund)
-  var SHOPIFY_AUG_REVENUE = 138159.05;
+  // SHOPIFY_AUG_REVENUE = Shopify Analytics' own "Total sales" for Aug 1-31 (gross 150,515.60 - discounts 3,813.04 - reversals 32,552.42 + taxes 20,876.91)
+  var SHOPIFY_AUG_REVENUE = 135027.05;
   var KNOWN_COGS = 84584.50; // all 160 units now have a real per-unit cost
   var PACKAGING_COST = 3200;
   var SHIPPING_COST = 18922.87;
